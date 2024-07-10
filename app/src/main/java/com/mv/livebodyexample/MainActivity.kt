@@ -99,12 +99,12 @@ class MainActivity : AppCompatActivity(), SetThresholdDialogFragment.ThresholdDi
             it.setFormat(ImageFormat.NV21)
             it.addCallback(object : SurfaceHolder.Callback, Camera.PreviewCallback {
                 override fun surfaceChanged(
-                    holder: SurfaceHolder?,
+                    p0: SurfaceHolder,
                     format: Int,
                     width: Int,
                     height: Int
                 ) {
-                    if (holder?.surface == null) return
+                    if (p0?.surface == null) return
 
                     if (camera == null) return
 
@@ -128,13 +128,13 @@ class MainActivity : AppCompatActivity(), SetThresholdDialogFragment.ThresholdDi
                     setCameraDisplayOrientation()
                 }
 
-                override fun surfaceDestroyed(holder: SurfaceHolder?) {
+                override fun surfaceDestroyed(p0: SurfaceHolder) {
                     camera?.setPreviewCallback(null)
                     camera?.release()
                     camera = null
                 }
 
-                override fun surfaceCreated(holder: SurfaceHolder?) {
+                override fun surfaceCreated(p0: SurfaceHolder) {
                     try {
                         camera = Camera.open(cameraId)
                     } catch (e: Exception) {
